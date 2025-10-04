@@ -11,6 +11,7 @@ public static class ActivityFiltersStage
             FilterDefinitions.MatchIfNotEmpty(Documents.Activity.Identifier, filters.Id),
             FilterDefinitions.MatchIfNotEmpty(Documents.Activity.Action, filters.Action),
             FilterDefinitions.MatchIfNotEmpty(Documents.Activity.TenantId, filters.TenantId),
+            FilterDefinitions.MatchIfNotEmpty(Documents.Activity.Resource, filters.ResourceId),
             FilterDefinitions.MatchBool(Documents.Activity.UserId, filters.IsDeleted)
         };
 
