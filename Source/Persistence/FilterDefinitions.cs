@@ -42,14 +42,4 @@ public static class FilterDefinitions
             ? Builders<BsonDocument>.Filter.Eq(field, Convert.ToInt32(parameter.Value))
             : FilterDefinition<BsonDocument>.Empty;
     }
-
-    public static SortDefinition<BsonDocument>? SortBy(SortFilters? sort)
-    {
-        if (sort is null || string.IsNullOrWhiteSpace(sort.Field))
-            return null;
-
-        return sort.Direction == Essentials.Filters.SortDirection.Ascending
-            ? Builders<BsonDocument>.Sort.Ascending(sort.Field)
-            : Builders<BsonDocument>.Sort.Descending(sort.Field);
-    }
 }
