@@ -4,7 +4,6 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-  </PropertyGroup>
 
     <!-- nuget package properties -->
     <PackageId>Vinder.Internal.Infrastructure</PackageId>
@@ -13,6 +12,7 @@
     <Product>Vinder.Internal.Infrastructure</Product>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="3.5.0" />
