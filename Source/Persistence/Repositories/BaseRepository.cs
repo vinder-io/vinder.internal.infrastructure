@@ -20,6 +20,7 @@ public abstract class BaseRepository<TEntity>(IMongoDatabase database, string co
     public virtual async Task<TEntity> InsertAsync(TEntity entity, CancellationToken cancellation = default)
     {
         entity.Id = Identifier.Generate<TEntity>();
+        entity.CreatedAt = DateTime.Now;
 
         await _collection.InsertOneAsync(entity, cancellationToken: cancellation);
 
