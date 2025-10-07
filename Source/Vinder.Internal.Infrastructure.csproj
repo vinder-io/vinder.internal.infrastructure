@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="3.5.0" />
-    <PackageReference Include="Vinder.Internal.Essentials" Version="1.0.4" />
+    <PackageReference Include="Vinder.Internal.Essentials" Version="1.0.5" />
   </ItemGroup>
 
 </Project>
