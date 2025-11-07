@@ -23,7 +23,7 @@ public static class FilterDefinitions
             : FilterDefinition<BsonDocument>.Empty;
     }
 
-    public static FilterDefinition<BsonDocument> MatchIfNotEmptyContains(string field, string? parameter)
+    public static FilterDefinition<BsonDocument> MatchIfContains(string field, string? parameter)
     {
         return string.IsNullOrWhiteSpace(parameter)
             ? FilterDefinition<BsonDocument>.Empty
@@ -41,5 +41,53 @@ public static class FilterDefinitions
         return parameter.HasValue
             ? Builders<BsonDocument>.Filter.Eq(field, Convert.ToInt32(parameter.Value))
             : FilterDefinition<BsonDocument>.Empty;
+    }
+
+    public static FilterDefinition<BsonDocument> MustBeWithinIfNotNull(string field, DateOnly? min = null, DateOnly? max = null)
+    {
+        if (!min.HasValue && !max.HasValue)
+            return FilterDefinition<BsonDocument>.Empty;
+
+        var filters = new List<FilterDefinition<BsonDocument>>();
+
+        if (min.HasValue)
+            filters.Add(Builders<BsonDocument>.Filter.Gte(field, min.Value));
+
+        if (max.HasValue)
+            filters.Add(Builders<BsonDocument>.Filter.Lte(field, max.Value));
+
+        return Builders<BsonDocument>.Filter.And(filters);
+    }
+
+    public static FilterDefinition<BsonDocument> MustBeWithinIfNotNull(string field, decimal? min = null, decimal? max = null)
+    {
+        if (!min.HasValue && !max.HasValue)
+            return FilterDefinition<BsonDocument>.Empty;
+
+        var filters = new List<FilterDefinition<BsonDocument>>();
+
+        if (min.HasValue)
+            filters.Add(Builders<BsonDocument>.Filter.Gte(field, min.Value));
+
+        if (max.HasValue)
+            filters.Add(Builders<BsonDocument>.Filter.Lte(field, max.Value));
+
+        return Builders<BsonDocument>.Filter.And(filters);
+    }
+
+    public static FilterDefinition<BsonDocument> MustBeWithinIfNotNull(string field, int? min = null, int? max = null)
+    {
+        if (!min.HasValue && !max.HasValue)
+            return FilterDefinition<BsonDocument>.Empty;
+
+        var filters = new List<FilterDefinition<BsonDocument>>();
+
+        if (min.HasValue)
+            filters.Add(Builders<BsonDocument>.Filter.Gte(field, min.Value));
+
+        if (max.HasValue)
+            filters.Add(Builders<BsonDocument>.Filter.Lte(field, max.Value));
+
+        return Builders<BsonDocument>.Filter.And(filters);
     }
 }
