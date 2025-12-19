@@ -1,8 +1,8 @@
 namespace Vinder.Internal.Infrastructure.Persistence.Repositories;
 
-public sealed class ActivityRepository(IMongoDatabase database) :
-    BaseRepository<Activity>(database, Collections.Activities),
-    IActivityRepository
+public sealed class ActivityCollection(IMongoDatabase database) :
+    BaseCollection<Activity>(database, Collections.Activities),
+    IActivityCollection
 {
     public async Task<IReadOnlyCollection<Activity>> GetActivitiesAsync(
         ActivityFilters filters, CancellationToken cancellation = default)

@@ -9,7 +9,7 @@ public static class SortFiltersStage
         if (sort is null || string.IsNullOrWhiteSpace(sort.Field))
             return pipeline;
 
-        var sortDefinition = sort.Direction == Essentials.Filters.SortDirection.Ascending
+        var sortDefinition = sort.Direction == Essentials.Filtering.SortDirection.Ascending
             ? Builders<TOutput>.Sort.Ascending(sort.Field)
             : Builders<TOutput>.Sort.Descending(sort.Field);
 
