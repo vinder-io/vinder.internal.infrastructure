@@ -59,7 +59,23 @@ public abstract class BaseCollection<TEntity>(IMongoDatabase database, string co
             entity.CreatedAt = DateTime.UtcNow;
         });
 
-        await _collection.InsertManyAsync(entities, cancellationToken: cancellation);
+        try
+        {
+            await _collection.InsertManyAsync(entities, cancellationToken: cancellation);
+        }
+        catch (MongoBulkWriteException exception) when (exception.WriteErrors.Any(error => error.Category == ServerErrorCategory.DuplicateKey))
+        {
+            await (behavior switch
+            {
+                WriteBehavior.IgnoreIfExists => Task.CompletedTask,
+
+                // infrastructure boundary: exception is intentionally rethrown inside a switch expression.
+                // preserving the original stack trace is not required for this propagation.
+                WriteBehavior.FailIfExists => throw exception,
+                WriteBehavior.Overwrite => Task.WhenAll(
+                    entities.Select(entity => _collection.ReplaceOneAsync(Builders<TEntity>.Filter.Eq(parameter => parameter.Id, entity.Id), entity, cancellationToken: cancellation))),
+            });
+        }
     }
 
     public virtual async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellation = default)
