@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+    <NoWarn>CS8524</NoWarn>
     <Nullable>enable</Nullable>
 
     <!-- nuget package properties -->
@@ -15,8 +16,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" Version="3.5.0" />
-    <PackageReference Include="Vinder.Internal.Essentials" Version="1.0.5" />
+    <PackageReference Include="MongoDB.Driver" Version="3.5.2" />
+    <PackageReference Include="Vinder.Internal.Essentials" Version="1.0.9" />
   </ItemGroup>
 
 </Project>
