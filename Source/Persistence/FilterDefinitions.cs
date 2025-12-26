@@ -90,4 +90,12 @@ public static class FilterDefinitions
 
         return Builders<BsonDocument>.Filter.And(filters);
     }
+
+    public static FilterDefinition<BsonDocument> MustBeInIfNotEmpty<T>(string field, IReadOnlyCollection<T>? values)
+    {
+        if (values == null || values.Count == 0)
+            return FilterDefinition<BsonDocument>.Empty;
+
+        return Builders<BsonDocument>.Filter.In(field, values);
+    }
 }
