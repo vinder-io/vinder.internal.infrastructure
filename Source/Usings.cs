@@ -6,7 +6,7 @@ global using Vinder.Internal.Essentials.Filtering;
 global using Vinder.Internal.Essentials.Contracts;
 global using Vinder.Internal.Essentials.Contracts.Behaviors;
 
-global using Vinder.Internal.Essentials.Entities;
+global using Vinder.Internal.Essentials.Aggregates;
 global using Vinder.Internal.Essentials.Utilities;
 
 /* global usings for others namespaces here */

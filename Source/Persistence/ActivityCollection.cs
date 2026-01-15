@@ -1,7 +1,7 @@
-namespace Vinder.Internal.Infrastructure.Persistence.Repositories;
+namespace Vinder.Internal.Infrastructure.Persistence;
 
 public sealed class ActivityCollection(IMongoDatabase database) :
-    BaseCollection<Activity>(database, Collections.Activities),
+    AggregateCollection<Activity>(database, Collections.Activities),
     IActivityCollection
 {
     public async Task<IReadOnlyCollection<Activity>> GetActivitiesAsync(
