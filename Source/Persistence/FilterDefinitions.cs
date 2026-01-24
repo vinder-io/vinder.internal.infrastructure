@@ -98,4 +98,16 @@ public static class FilterDefinitions
 
         return Builders<BsonDocument>.Filter.In(field, values);
     }
+
+    public static FilterDefinition<BsonDocument> MatchIfNotEmptyDictionary(string field, Dictionary<string, object>? values)
+    {
+        if (values == null || values.Count == 0)
+            return FilterDefinition<BsonDocument>.Empty;
+
+        var filters = values
+            .Select(pair => Builders<BsonDocument>.Filter.Eq($"{field}.{pair.Key}", BsonValue.Create(pair.Value)))
+            .ToList();
+
+        return Builders<BsonDocument>.Filter.And(filters);
+    }
 }
